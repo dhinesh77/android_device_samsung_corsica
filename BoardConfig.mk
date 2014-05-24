@@ -13,7 +13,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 
 TARGET_BOOTLOADER_BOARD_NAME := rhea
 
-BOARD_KERNEL_CMDLINE := 
+BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 mem=480M gpt pmem=112M carveout=18M androidboot.console=ttyS1
 BOARD_KERNEL_BASE := 0x82000000
 BOARD_KERNEL_PAGESIZE := 4096
 
@@ -62,7 +62,7 @@ BOARD_NO_APSME_ATTR := true
 
 # Hardware rendering
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/samsung/corsica/egl.cfg
+#BOARD_EGL_CFG := device/samsung/corsica/egl.cfg
 BOARD_EGL_NEEDS_LEGACY_FB := true
 
 # Audio
@@ -84,15 +84,15 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun0/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg/gadget/lun0/file"
 
 #twrp
-DEVICE_RESOLUTION := 240x320
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-RECOVERY_SDCARD_ON_DATA := true
-BOARD_HAS_NO_REAL_SDCARD := true
-TW_INTERNAL_STORAGE_PATH := "/data/media"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/sdcard"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
-TW_MAX_BRIGHTNESS := 255
-TW_INCLUDE_INJECTTWRP := true
-TWRP_EVENT_LOGGING := false
+#DEVICE_RESOLUTION := 240x320
+#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+#RECOVERY_SDCARD_ON_DATA := true
+#BOARD_HAS_NO_REAL_SDCARD := true
+#TW_INTERNAL_STORAGE_PATH := "/data/media"
+#TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+#TW_EXTERNAL_STORAGE_PATH := "/sdcard"
+#TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+#TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
+#TW_MAX_BRIGHTNESS := 255
+#TW_INCLUDE_INJECTTWRP := true
+#TWRP_EVENT_LOGGING := false

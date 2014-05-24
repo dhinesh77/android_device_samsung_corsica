@@ -82,6 +82,14 @@ lib/libVCOS.so
 lib/libwvdrm_L3.so
 lib/libwvm.so
 lib/libWVStreamControlAPI_L3.so
+lib/libV3D_csc.so
+lib/libV3D_driver.so
+lib/libV3D_server.so
+lib/libVCE_imageconv.so
+lib/libVCE_csl.so
+lib/libVCE_driver.so
+lib/libVCE_vtq.so
+lib/libbralloc
 lib/modules/VoiceSolution.ko
 lib/soundfx/libaudiopreprocessing.so
 lib/soundfx/libbundlewrapper.so
