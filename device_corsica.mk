@@ -8,8 +8,9 @@ $(call inherit-product-if-exists, vendor/samsung/corsica/corsica-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += device/samsung/corsica/overlay
 
 # LDPI assets
-PRODUCT_AAPT_CONFIG := normal mdpi ldpi
+PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
+#$(call inherit-product, device/ldpi-common/ldpi.mk)
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -17,11 +18,14 @@ PRODUCT_COPY_FILES += \
 	device/samsung/corsica/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
 	device/samsung/corsica/init.log.rc:root/init.log.rc \
 	device/samsung/corsica/lpm.rc:root/lpm.rc \
+	device/samsung/corsica/init.bt.rc:root/init.bt.rc \
 	device/samsung/corsica/ueventd.rhea_ss_corsica.rc:root/ueventd.rhea_ss_corsica.rc \
+        device/samsung/corsica/init.recovery.rhea_ss_corsica.rc:root/init.recovery.rhea_ss_corsica.rc \
 	device/samsung/corsica/fstab.rhea_ss_corsica:root/fstab.rhea_ss_corsica 
 
 PRODUCT_COPY_FILES += \
-	device/samsung/corsica/vold.fstab:system/etc/vold.fstab 
+	device/samsung/corsica/vold.fstab:system/etc/vold.fstab \
+        device/samsung/corsica/vold.conf:system/etc/vold.conf
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
@@ -46,8 +50,8 @@ PRODUCT_PACKAGES += \
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
-	SamsungServiceMode \
-	Torch 
+	SamsungServiceMode 
+	
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -99,6 +103,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # MTP
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 320
+TARGET_SCREEN_WIDTH := 240
 
 # Dalvik heap config
 include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk

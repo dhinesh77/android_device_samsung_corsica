@@ -100,7 +100,7 @@ usr/lib/alsa-lib/libasound_module_pcm_bcmfilter.so
 usr/lib/alsa-lib/libbcm_hp_filter.so
 usr/lib/alsa-lib/libbcm_test_filter.so
 usr/share/alsa/alsa.conf
-lib/hw/camera.rhea.so
-lib/hw/gralloc.rhea.so
-lib/hw/hwcomposer.rhea.so
-lib/egl/libGLES_rhea.so
+vendor/lib/hw/camera.rhea.so
+vendor/lib/hw/gralloc.rhea.so
+vendor/lib/hw/hwcomposer.rhea.so
+vendor/lib/egl/libGLES_rhea.so

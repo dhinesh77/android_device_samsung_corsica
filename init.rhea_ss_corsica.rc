@@ -1,30 +1,8 @@
 import init.bcm2165x.usb.rc
+import init.bt.rc
 import init.log.rc
 
 on early-init
-    export EXTERNAL_STORAGE /storage/sdcard0
-    mkdir /storage 0550 system sdcard_r
-    mkdir /storage/sdcard0 0000 system system
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-# map "real" external storages paths also in same way. backwards compatibility.
-    symlink /storage/extSdCard /mnt/extSdCard
-    symlink /storage/UsbDriveA /mnt/UsbDriveA
-    symlink /storage/UsbDriveB /mnt/UsbDriveB
-    symlink /storage/UsbDriveC /mnt/UsbDriveC
-    symlink /storage/UsbDriveD /mnt/UsbDriveD
-    symlink /storage/UsbDriveE /mnt/UsbDriveE
-    symlink /storage/UsbDriveF /mnt/UsbDriveF
-
-    export SECONDARY_STORAGE /storage/extSdCard:/storage/UsbDriveA:/storage/UsbDriveB:/storage/UsbDriveC:/storage/UsbDriveD:/storage/UsbDriveE:/storage/UsbDriveF
-    mkdir /storage/extSdCard 0000 system system
-    mkdir /storage/UsbDriveA 0000 system system
-    mkdir /storage/UsbDriveB 0000 system system
-    mkdir /storage/UsbDriveC 0000 system system
-    mkdir /storage/UsbDriveD 0000 system system
-    mkdir /storage/UsbDriveE 0000 system system
-    mkdir /storage/UsbDriveF 0000 system system
-
     mkdir /efs 0771 radio system
     symlink /efs /factory
 
@@ -33,6 +11,27 @@ on early-init
     mkdir /preload 0771 system system 
 
 on init
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage 0550 system sdcard_r
+    mkdir /storage/emulated 0555 root root
+
+    # External storage directories
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /storage/usbdisk0 0000 system system
+
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export SECONDARY_STORAGE /storage/sdcard1
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
+
+    # For backwards compatibility
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    symlink /storage/sdcard1 /extSdCard
+    symlink /storage/sdcard1 /mnt/extSdCard
+    symlink /storage/sdcard1 /external_sd
 
 on post-fs-data
 # we will remap this as /storage/sdcard with the sdcard fuse tool
