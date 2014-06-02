@@ -18,20 +18,19 @@ PRODUCT_COPY_FILES += \
 	device/samsung/corsica/init.bcm2165x.usb.rc:root/init.bcm2165x.usb.rc \
 	device/samsung/corsica/init.log.rc:root/init.log.rc \
 	device/samsung/corsica/lpm.rc:root/lpm.rc \
-	device/samsung/corsica/init.bt.rc:root/init.bt.rc \
 	device/samsung/corsica/ueventd.rhea_ss_corsica.rc:root/ueventd.rhea_ss_corsica.rc \
         device/samsung/corsica/init.recovery.rhea_ss_corsica.rc:root/init.recovery.rhea_ss_corsica.rc \
 	device/samsung/corsica/fstab.rhea_ss_corsica:root/fstab.rhea_ss_corsica 
 
 PRODUCT_COPY_FILES += \
-	device/samsung/corsica/vold.fstab:system/etc/vold.fstab \
-        device/samsung/corsica/vold.conf:system/etc/vold.conf
+	device/samsung/corsica/vold.fstab:system/etc/vold.fstab 
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/corsica/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
 	device/samsung/corsica/bcm_keypad_v2.kl:system/usr/keylayout/bcm_keypad_v2.kl \
 	device/samsung/corsica/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	device/samsung/corsica/Generic.kl:system/usr/keylayout/Generic.kl \
 	device/samsung/corsica/samsung-keypad.kl:system/usr/keylayout/samsung-keypad.kl 
 
 # Filesystem management tools
@@ -67,7 +66,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 	frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
 	frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
