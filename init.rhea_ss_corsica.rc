@@ -2,6 +2,7 @@ import init.bcm2165x.usb.rc
 import init.log.rc
 
 on early-init
+    loglevel 9
 
     mkdir /efs 0771 radio system
 
@@ -42,12 +43,13 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
     #for wifi
-     mkdir /efs/wifi 0775 radio system
+    mkdir /efs/wifi 0775 radio system
     mkdir /efs/bluetooth 0775 radio system
     mkdir /efs/imei 0775 radio system
     mkdir /data/misc/wifi 0775 wifi system
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0775 dhcp dhcp
+    mkdir /system/etc/wifi 0775 wifi wifi
     chown system system /efs/wifi/.mac.info
     chmod 0664 /efs/wifi/.mac.info
     chown system system /efs/imei/.nvmac.info
@@ -105,8 +107,6 @@ on boot
 # SISO-ANDR_PERF :: END
 
     chown system system /sys/devices/platform/pwm-backlight.0/backlight/pwm-backlight.0/brightness
-
-    symlink /dev/block/mmcblk0p11 /dev/block/param
 
     # Permissions for bluetooth
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
@@ -210,6 +210,8 @@ on boot
     chown gps system /dev/gps_irq
     chmod 0660 /dev/gps_irq
 
+    class_start default
+
     write /sys/class/gpio/export 28
     chown gps system /sys/class/gpio/gpio28/value
     chown gps system /sys/class/gpio/gpio28/direction
@@ -232,13 +234,8 @@ on boot
     chown root bluetooth /dev/ttyS0
     chmod 0777 /dev/ttyS0
 
-#for fm radio    
-    copy /system/etc/local.prop /data/local.prop
-    chown system bluetooth /data/local.prop
-    chmod 0660 /data/local.prop
-#    setprop service.brcm.bt.patchfile /system/bin/BCM2076B1_xxx.hcd
-# permissions for FMRadio of Broadcom
-    chmod 0777 /system/bin/btld
+# allow user space (atx) access to kernel pm debug
+    chown system system /sys/module/rhea_pm_dbg/parameters/debug
 
 # SEC_PRODUCT_FEATURE_COMMON_USE_MULTISIM
     setprop ro.multisim.simslotcount 2
@@ -305,14 +302,17 @@ on fs
 	chown radio system /dev/block/mmcblk0p18    
 	chmod 0770 /dev/block/mmcblk0p18
 
-	chmod 6755 /system/xbin/su
+    # Permissions for DVFS
+    chown radio system /sys/power/cpufreq_table
+    chown radio system /sys/power/cpufreq_max_limit
+    chown radio system /sys/power/cpufreq_min_limit
+    chmod 0660 /sys/power/cpufreq_table
+    chmod 0660 /sys/power/cpufreq_max_limit
+    chmod 0660 /sys/power/cpufreq_min_limit
 
 #   Logging required to save file in /data/brcm for configuration
     mkdir /data/brcm
     chmod 0775 /data/brcm
-
-# Permissions for System Server and daemons.
-#    chown system system /sys/devices/platform/pwm-backlight.0/backlight/pwm-backlight.0/brightness
 
 # Permission for pm debug - force sleep
     chown system system /sys/module/rhea_pm_dbg/parameters/debug
@@ -349,13 +349,6 @@ on fs
     chown system system /sys/class/sec/sec_touchkey/touchkey_threshold
     chmod 0660 /sys/class/sec/sec_touchkey/touchkey_threshold
     
-# cpu freq
-	chown media root /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-	chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-
-# make directory for storing sales code
-	mkdir /efs/imei 0775 radio system 
-
     chown system radio /sys/class/sec/switch/adc
 
 on post-fs
@@ -386,11 +379,6 @@ service ril-daemon /system/bin/rild
     socket rild-debug stream 660 radio system
     user root
     group radio cache inet misc audio system sdcard_rw log sdcard_r
-
-service mobex-daemon /system/bin/npsmobex
-    class main
-    user system
-    group system radio inet sdcard_rw
 
 # create virtual SD card at /storage/sdcard, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
@@ -488,7 +476,7 @@ service gpsd /system/bin/glgps -c /system/etc/gps/glconfig.xml
 service console /system/bin/atx -l -d
     class main
     console
-#    oneshot
+    oneshot
     user system
     group vpn net_admin net_raw radio system sdcard_rw log mount
 
@@ -511,4 +499,3 @@ service set_simid /system/bin/atx --fordev=ACM --runcmd=/data/atx/setsim.txt
 on property:dev.bootcomplete=1
     write /sys/module/rhea_pwr_mgr/parameters/pm_late_init 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
-
