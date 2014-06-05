@@ -377,7 +377,7 @@ service at_distributor /system/bin/at_distributor
 	oneshot
 
 # RILD
-service ril-daemon /system/bin/rild
+service rhea-ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
     socket rild1 stream 660 root radio
