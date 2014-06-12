@@ -44,3 +44,6 @@
 
 # SYSTEM Status
 /dev/block/mmcblk0p11        0660   system     root  
+
+# wifi
+/dev/rfkill               0660    root        wifi

@@ -1,5 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+** Copyright 2009, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<!-- These resources are around just to allow their values to be customized
+     for different hardware and product builds. -->
 <resources>
+    <!-- Flag indicating whether we should enable the automatic brightness in Settings.
+         config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
+    <bool name="config_automatic_brightness_available">true</bool>
+
+    <!-- There is no charging LED. -->
+    <bool name="config_unplugTurnsOnScreen">true</bool>
+
+    <!-- Our amoled doesn't animate well. -->
+    <bool name="config_animateScreenLights">false</bool>
+
+    <!-- disable menu hard key on Crespo in non-pattern lockscreen -->
+    <bool name="config_disableMenuKeyInLockScreen">true</bool>
+
+    <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
+         The N entries of this array define N + 1 zones as follows:
+
+         Zone 0:        0 <= LUX < array[0]
+         Zone 1:        array[0] <= LUX < array[1]
+         ...
+         Zone N:        array[N - 1] <= LUX < array[N]
+         Zone N + 1:    array[N] <= LUX < infinity
+
+         Must be overridden in platform specific overlays -->
+     <integer-array name="config_autoBrightnessLevels">
+         <item>15</item>
+         <item>150</item>
+         <item>1500</item>
+         <item>15000</item>
+     </integer-array>
+
+    <!-- Array of output values for LCD backlight corresponding to the LUX values
+         in the config_autoBrightnessLevels array.  This array should have size one greater
+         than the size of the config_autoBrightnessLevels array.
+    -->
+    <integer-array name="config_autoBrightnessLcdBacklightValues">
+        <item>20</item>
+        <item>80</item>
+        <item>130</item>
+        <item>190</item>
+        <item>255</item>
+    </integer-array>
+
+    <!-- Array of output values for button backlight corresponding to the LUX values
+         in the config_autoBrightnessLevels array.  This array should have size one greater
+         than the size of the config_autoBrightnessLevels array.
+    -->
+    <integer-array name="config_autoBrightnessButtonBacklightValues">
+        <item>255</item>
+        <item>255</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+
+    <!-- Array of output values for keyboard backlight corresponding to the LUX values
+         in the config_autoBrightnessLevels array.  This array should have size one greater
+         than the size of the config_autoBrightnessLevels array.
+    -->
+    <integer-array name="config_autoBrightnessKeyboardBacklightValues">
+        <item>255</item>
+        <item>255</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+
+    <integer name="config_deskDockKeepsScreenOn">0</integer>
+    <integer name="config_carDockKeepsScreenOn">1</integer>
+
+    <!-- Default color for notification LED is white -->
+    <color name="config_defaultNotificationColor">#ffffffff</color>
+
+    <!-- Default blink frequency for notification LED is 9 seconds. -->
+    <integer name="config_defaultNotificationLedOff">9000</integer>
+
+    <string-array name="config_locationProviderPackageNames" translatable="false">
+        <item>com.android.location.fused</item>
+        <item>com.google.android.location</item>
+    </string-array>
+
+    <!-- XXXXX NOTE THE FOLLOWING RESOURCES USE THE WRONG NAMING CONVENTION.
+         Please don't copy them, copy anything else. -->
+
     <!-- This string array should be overridden by the device to present a list of network
          attributes.  This is used by the connectivity manager to decide which networks can coexist
          based on the hardware -->
@@ -9,74 +112,97 @@
          before automatically restore the default connection.  Set -1 if the connection
          does not require auto-restore. -->
     <!-- the 6th element indicates boot-time dependency-met value. -->
-    <string-array name="networkAttributes">
+    <string-array translatable="false" name="networkAttributes">
         <item>"wifi,1,1,1,-1,true"</item>
         <item>"mobile,0,0,0,-1,true"</item>
         <item>"mobile_mms,2,0,2,60000,true"</item>
         <item>"mobile_supl,3,0,2,60000,true"</item>
-        <item>"mobile_dun,4,0,2,60000,true"</item>
+        <item>"mobile_dun,4,0,4,60000,true"</item>
         <item>"mobile_hipri,5,0,3,60000,true"</item>
-        <item>"bluetooth,7,7,2,-1,true"</item>
-        <item>"mobile_fota,10,0,2,60000,true"</item>
-        <item>"mobile_ims,11,0,2,60000,true"</item>
-        <item>"mobile_cbs,12,0,2,60000,true"</item>
-        <item>"wifi_p2p,13,1,0,-1,true"</item>
+        <item>"mobile_bluetooth,7,7,1,-1,true"</item>
     </string-array>
 
-    <!-- Boolean indicating whether the wifi chipset has p2p support -->
-    <bool name="config_wifi_p2p_support">true</bool>
-
-    <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
-    <bool name="config_wifi_dual_band_support">true</bool>
-
-    <!-- Boolean indicating whether the wifi chipset has background scan support -->
-    <bool name="config_wifi_background_scan_support">true</bool>
+    <!-- An Array of "[ConnectivityManager connectionType],
+         [# simultaneous connection types]"  -->
+    <string-array translatable="false" name="radioAttributes">
+        <item>"1,1"</item>
+        <item>"0,1"</item>
+        <item>"7,1"</item>
+    </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
-    <string-array name="config_tether_usb_regexs">
+    <string-array translatable="false" name="config_tether_usb_regexs">
         <item>"rndis0"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
          should be empty.  An example would be "softap.*" -->
-    <string-array name="config_tether_wifi_regexs">
+    <string-array translatable="false" name="config_tether_wifi_regexs">
         <item>"wlan0"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
          should be empty. -->
-    <string-array name="config_tether_bluetooth_regexs">
+    <string-array translatable="false" name="config_tether_bluetooth_regexs">
         <item>"bt-pan"</item>
     </string-array>
-
-    <!-- Boolean indicating if current platform supports bluetooth wide band
-         speech -->
-    <bool name="config_bluetooth_wide_band_speech">false</bool>
 
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
     <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
     <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
-    <integer-array name="config_tether_upstream_types">
+    <integer-array translatable="false" name="config_tether_upstream_types">
         <item>0</item>
         <item>1</item>
         <item>5</item>
         <item>7</item>
     </integer-array>
 
-    <!-- This string array should be overridden by the device to present a list of radio
-         attributes.  This is used by the connectivity manager to decide which networks can coexist
-         based on the hardware -->
-    <!-- An Array of "[ConnectivityManager connectionType],
-                      [# simultaneous connection types]"  -->
-    <string-array name="radioAttributes">
-        <item>"1,1"</item>
-        <item>"0,1"</item>
-        <item>"7,1"</item>
-    </string-array>
+    <!-- Minimum screen brightness allowed by the power manager. -->
+    <integer name="config_screenBrightnessDim">10</integer>
+
+    <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
+    <integer-array name="config_keyboardTapVibePattern">
+        <item>30</item>
+    </integer-array>
+
+    <!-- Vibrator pattern for feedback about booting with safe mode disabled -->
+    <integer-array name="config_safeModeDisabledVibePattern">
+        <item>1</item>
+    </integer-array>
+
+    <!-- crespo doesn't handle this blur effect very quickly. -->
+    <bool name="config_sf_slowBlur">true</bool>
+
+    <!-- The default iface on which to monitor data use -->
+    <string name="config_datause_iface">rmnet0</string>
+
+    <!-- Boolean indicating if restoring network selection should be skipped -->
+    <!-- The restoring is handled by modem if it is true -->
+    <bool translatable="false" name="skip_restoring_network_selection">true</bool>
+
+    <!-- Boolean indicating if current platform supports bluetooth wide band
+         speech -->
+    <bool name="config_bluetooth_wide_band_speech">false</bool>
+
+    <bool name="config_ui_enableFadingMarquee">false</bool>
+
+    <!-- The attenuation in dB applied to the sound effects played
+         through AudioManager.playSoundEffect() when no volume is specified. -->
+    <integer name="config_soundEffectVolumeDb">-12</integer>
+
+    <!-- Timeout in MS for how long you have to long-press the back key to
+         kill the foreground app. -->
+    <integer name="config_backKillTimeout">1500</integer>
+
+    <!-- Boolean to enable stk functionality on Samsung phones -->
+    <bool name="config_samsung_stk">true</bool>
+
+    <!-- Device supports LED flashlight -->
+    <bool name="config_enableTorch">true</bool>
 
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -90,37 +216,9 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">7</integer>
 
-    <!-- Boolean to enable stk functionality on Samsung phones -->
-    <bool name="config_samsung_stk">true</bool>
+    <!-- Disable lockscreen translucent decor by default -->
+    <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
-   <!-- Package name(s) containing location provider support.
-         These packages can contain services implementing location providers,
-         such as the Geocode Provider, Network Location Provider, and
-         Fused Location Provider. They will each be searched for
-         service components implementing these providers.
-         It is strongly recommended that the packages explicitly named
-         below are on the system image, so that they will not map to
-         a 3rd party application.
-         The location framework also has support for installation
-         of new location providers at run-time. The new package does not
-         have to be explicitly listed here, however it must have a signature
-         that matches the signature of at least one package on this list.
-         -->
-    <string-array name="config_locationProviderPackageNames">
-        <!-- The standard AOSP fused location provider -->
-        <item>com.android.location.fused</item>
-        <!-- The Google Network Location Services location provider -->
-        <item>com.google.android.location</item>
-    </string-array>
-    
-    <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
-    <bool name="config_unplugTurnsOnScreen">true</bool>
-
-    <!-- If this is true, the screen will fade off. -->
-    <bool name="config_animateScreenLights">false</bool>
-
-    <!-- Screen brightness used to dim the screen when the user activity
-         timeout expires.  May be less than the minimum allowed brightness setting
-         that can be set by the user. -->
-    <integer name="config_screenBrightnessDim">20</integer>
+    <!-- Whether to enable auto provisioning the app for new SIM card on boot.-->
+    <bool name="config_auto_provision_enable">true</bool>
 </resources>
