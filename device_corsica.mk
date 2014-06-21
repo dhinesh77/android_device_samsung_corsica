@@ -91,6 +91,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 \
     ro.config.low_ram=true
+    
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/system/lib/libbrcm_ril.so \
+    ro.ril.disable.power.collapse=0 \
+    ro.ril.gprsclass=10 \
+    ro.ril.hsxpa=1 \
+    ro.telephony.call_ring.delay=0 \
+    ro.telephony.default_network=0 \
+    ro.telephony.ril.v3=icccardstatus,datacall,signalstrength,facilitylock
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
