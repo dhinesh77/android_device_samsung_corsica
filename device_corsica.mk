@@ -42,8 +42,7 @@ PRODUCT_PACKAGES += \
 # Misc other modules
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
-	audio.usb.default
-
+	audio.usb.default 
 # Device-specific packages
 PRODUCT_PACKAGES += \
 	SamsungServiceMode 
@@ -63,6 +62,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+        frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 	frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
 	frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
@@ -87,20 +87,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=rmnet0 \
     ro.telephony.ril_class=SamsungBCMRIL \
     ro.zygote.disable_gl_preload=true \
-    persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
-    ro.telephony.call_ring=0 \
-    ro.config.low_ram=true
-    
-# RIL
-PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libbrcm_ril.so \
-    ro.ril.disable.power.collapse=0 \
-    ro.ril.gprsclass=10 \
-    ro.ril.hsxpa=1 \
-    ro.telephony.call_ring.delay=0 \
-    ro.telephony.default_network=0 \
-    ro.telephony.ril.v3=icccardstatus,datacall,signalstrength,facilitylock
+    ro.telephony.call_ring=0 
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -136,4 +124,3 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_corsica
 PRODUCT_DEVICE := corsica
-
