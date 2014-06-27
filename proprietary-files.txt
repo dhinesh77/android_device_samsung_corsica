@@ -49,7 +49,7 @@ lib/libacdapi_azi.so
 lib/libat_stubs.so
 lib/libatlog.so
 lib/libbrcm_ril.so
-lib/libbralloc
+lib/libbralloc.so
 lib/libbrcmaacenc.so
 lib/libbrcmamrnbaridec.so
 lib/libbrcmamrnbarienc.so
