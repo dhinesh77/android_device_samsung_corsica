@@ -4,6 +4,7 @@ bin/atx
 bin/atxd
 bin/BCM4330B1_002.001.003.0967.1089.hcd
 bin/bkmgrd
+bin/bluetoothd
 bin/btld
 bin/cate_rpc_util
 bin/glgps
@@ -64,12 +65,14 @@ lib/libBrcmOMX_Core.so
 lib/libbrcmparser.so
 lib/libcapi2.so
 lib/libcate_rpc.so
+lib/libfactoryutil.so
 lib/libFraunhoferAAC.so
 lib/libhdcp2.so
 lib/libImmVibeJ.so
 lib/libISP.so
 lib/libisp2.so
 lib/liblvvefs.so
+lib/libomission_avoidance.so
 lib/libOMX.brcm.audio.aac.decoder.so
 lib/libOMX.brcm.audio.aac.encoder.so
 lib/libOMX.brcm.audio.amrnb.decoder.so
@@ -84,6 +87,7 @@ lib/libsamsungRecord.so
 lib/libsamsungSoundbooster.so
 lib/libseckeyprov.so
 lib/libsecnativefeature.so
+lib/libsecril-client.so
 lib/libsoc.so
 lib/libsoundalive.so
 lib/libSoundAlive_VSP_ver312a.so
@@ -115,3 +119,4 @@ usr/lib/alsa-lib/libasound_module_pcm_bcmfilter.so
 usr/lib/alsa-lib/libbcm_hp_filter.so
 usr/lib/alsa-lib/libbcm_test_filter.so
 usr/share/alsa/alsa.conf
+vendor/gfx.fw
