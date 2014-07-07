@@ -123,7 +123,7 @@ public class SamsungBCMRIL extends RIL implements CommandsInterface {
         invokeOemRilRequestRaw(new byte[] { 'B', 'R', 'C', 'M', key, value }, response);
     }
 
-    protected RILRequest
+    protected void
     processSolicited (Parcel p) {
         int serial, error;
 
