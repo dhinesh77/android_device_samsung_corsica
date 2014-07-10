@@ -22,9 +22,6 @@ PRODUCT_COPY_FILES += \
         device/samsung/corsica/init.recovery.rhea_ss_corsica.rc:root/init.recovery.rhea_ss_corsica.rc \
 	device/samsung/corsica/fstab.rhea_ss_corsica:root/fstab.rhea_ss_corsica 
 
-PRODUCT_COPY_FILES += \
-	device/samsung/corsica/vold.fstab:system/etc/vold.fstab 
-
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/corsica/bcm_headset.kl:system/usr/keylayout/bcm_headset.kl \
