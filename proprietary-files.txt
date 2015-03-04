@@ -4,8 +4,8 @@ bin/atx
 bin/atxd
 bin/BCM4330B1_002.001.003.0967.1089.hcd
 bin/bkmgrd
-bin/bluetoothd
 bin/btld
+bin/bluetoothd
 bin/cate_rpc_util
 bin/glgps
 bin/gps.cer
@@ -16,8 +16,6 @@ bin/mfgloader
 bin/mttlogger
 bin/npsmobex
 bin/rild
-bin/p2p_supplicant
-bin/wlandutservice
 etc/asound.conf
 etc/audio_policy.conf
 etc/DiamondVoice.txt
@@ -50,7 +48,7 @@ lib/libacdapi_azi.so
 lib/libat_stubs.so
 lib/libatlog.so
 lib/libbrcm_ril.so
-lib/libbralloc.so
+lib/libbralloc
 lib/libbrcmaacenc.so
 lib/libbrcmamrnbaridec.so
 lib/libbrcmamrnbarienc.so
@@ -72,7 +70,7 @@ lib/libImmVibeJ.so
 lib/libISP.so
 lib/libisp2.so
 lib/liblvvefs.so
-lib/libomission_avoidance.so
+lib/libomission_avoidance
 lib/libOMX.brcm.audio.aac.decoder.so
 lib/libOMX.brcm.audio.aac.encoder.so
 lib/libOMX.brcm.audio.amrnb.decoder.so
@@ -109,12 +107,8 @@ lib/libVCE_vtq.so
 lib/libvtqinit.so
 lib/libvpx_dec.so
 lib/libvt_codec.so
+lib/liblvvefs.so
 lib/modules/VoiceSolution.ko
-lib/soundfx/libaudiopreprocessing.so
-lib/soundfx/libbundlewrapper.so
-lib/soundfx/libdownmix.so
-lib/soundfx/libreverbwrapper.so
-lib/soundfx/libvisualizer.so
 usr/lib/alsa-lib/libasound_module_pcm_bcmfilter.so
 usr/lib/alsa-lib/libbcm_hp_filter.so
 usr/lib/alsa-lib/libbcm_test_filter.so

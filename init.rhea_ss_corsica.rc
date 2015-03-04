@@ -188,10 +188,6 @@ on boot
     chmod 0777 /dev/s5p-smem
     rm /data/app/tlcd_sock
 
-# phone
-    setprop ro.telephony.call_ring.multiple 0
-
-
 # Enable dithering algorithm
     setprop fb.force.dithering 1
 
@@ -291,6 +287,7 @@ on boot
     copy /system/etc/DiamondVoice_Filter.txt /data/DiamondVoice_Filter.txt
     chmod 0777 /data/DiamondVoice_Filter.txt
 	insmod /system/lib/modules/VoiceSolution.ko
+
 
 on fs
     mount_all /fstab.rhea_ss_corsica
@@ -484,3 +481,4 @@ on property:dev.bootcomplete=1
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
     class late_start
     disabled
+

@@ -183,8 +183,6 @@
          speech -->
     <bool name="config_bluetooth_wide_band_speech">false</bool>
 
-    <bool name="config_ui_enableFadingMarquee">false</bool>
-
     <!-- The attenuation in dB applied to the sound effects played
          through AudioManager.playSoundEffect() when no volume is specified. -->
     <integer name="config_soundEffectVolumeDb">-12</integer>

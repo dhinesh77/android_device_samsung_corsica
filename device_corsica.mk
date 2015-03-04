@@ -42,7 +42,16 @@ PRODUCT_PACKAGES += \
 # Misc other modules
 PRODUCT_PACKAGES += \
 	audio.a2dp.default \
-	audio.usb.default 
+        audio.r_submix.default \
+	audio.usb.default
+
+# Wifi
+PRODUCT_PACKAGES += \
+        dhcpcd.conf \
+        hostapd \
+        wpa_supplicant \
+        wpa_supplicant.conf
+
 # Device-specific packages
 PRODUCT_PACKAGES += \
 	SamsungServiceMode 
@@ -56,6 +65,7 @@ PRODUCT_PACKAGES += \
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
 	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
@@ -73,6 +83,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
+
 # Support for Browser's saved page feature. This allows
 # for pages saved on previous versions of the OS to be
 # viewed on the current OS.
@@ -87,6 +98,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=rmnet0 \
     ro.telephony.ril_class=SamsungBCMRIL \
     ro.zygote.disable_gl_preload=true \
+    persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 
 
@@ -124,3 +136,4 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_corsica
 PRODUCT_DEVICE := corsica
+
